@@ -1,6 +1,7 @@
 ﻿using ChattingApp.Core.Context;
 using ChattingApp.Entities.Helpers;
 using ChattingApp.Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,7 +16,7 @@ namespace ChattingApp.Api.Controllers
         {
             this.context = context;
         }
-
+        [Authorize]
         [HttpGet(Router.UserRouting.GetUsers)]
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
         {

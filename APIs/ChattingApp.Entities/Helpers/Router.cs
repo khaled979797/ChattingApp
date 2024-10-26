@@ -12,5 +12,12 @@
             public const string GetUsers = Prefix + "/Users";
             public const string GetUser = Prefix + SingleRoute;
         }
+
+        public static class AccountRouting
+        {
+            public const string Prefix = Rule + "Account";
+            public const string Register = Prefix + "/Register";
+            public const string Login = Prefix + "/Login";
+        }
     }
 }

@@ -1,5 +1,4 @@
-using ChattingApp.Core.Context;
-using Microsoft.EntityFrameworkCore;
+using ChattingApp.Core;
 
 namespace ChattingApp.Api
 {
@@ -16,15 +15,8 @@ namespace ChattingApp.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            #region Context
-            builder.Services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("dbContext"));
-            });
-            #endregion
-
-            #region Cors
-            builder.Services.AddCors();
+            #region Services
+            builder.Services.AddCoreModuleServices(builder.Configuration);
             #endregion
 
             var app = builder.Build();
@@ -41,6 +33,8 @@ namespace ChattingApp.Api
             app.UseRouting();
 
             app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
