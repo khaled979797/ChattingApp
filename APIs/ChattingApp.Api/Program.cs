@@ -1,4 +1,3 @@
-
 using ChattingApp.Core.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +23,10 @@ namespace ChattingApp.Api
             });
             #endregion
 
+            #region Cors
+            builder.Services.AddCors();
+            #endregion
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -35,8 +38,11 @@ namespace ChattingApp.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseRouting();
 
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseAuthorization();
 
             app.MapControllers();
 
