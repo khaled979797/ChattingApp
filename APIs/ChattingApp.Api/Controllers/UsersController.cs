@@ -1,32 +1,33 @@
-﻿using ChattingApp.Core.Context;
+﻿using AutoMapper;
+using ChattingApp.Core.Interfaces;
+using ChattingApp.Entities.DTOs;
 using ChattingApp.Entities.Helpers;
-using ChattingApp.Entities.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ChattingApp.Api.Controllers
 {
+    //[Authorize]
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly AppDbContext context;
+        private readonly IUserRepository userRepository;
+        private readonly IMapper mapper;
 
-        public UsersController(AppDbContext context)
+        public UsersController(IUserRepository userRepository, IMapper mapper)
         {
-            this.context = context;
+            this.userRepository = userRepository;
+            this.mapper = mapper;
         }
-        [Authorize]
         [HttpGet(Router.UserRouting.GetUsers)]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers()
         {
-            return await context.Users.ToListAsync();
+            return Ok(await userRepository.GetMembersAsync());
         }
 
         [HttpGet(Router.UserRouting.GetUser)]
-        public async Task<ActionResult<AppUser>> GetUser(int id)
+        public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
-            return await context.Users.FindAsync(id);
+            return await userRepository.GetMemberAsync(username);
         }
     }
 }
