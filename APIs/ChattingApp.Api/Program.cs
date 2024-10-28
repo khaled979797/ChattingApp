@@ -1,4 +1,5 @@
 using ChattingApp.Core;
+using ChattingApp.Entities.Helpers;
 
 namespace ChattingApp.Api
 {
@@ -27,6 +28,8 @@ namespace ChattingApp.Api
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 

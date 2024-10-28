@@ -19,5 +19,14 @@
             public const string Register = Prefix + "/Register";
             public const string Login = Prefix + "/Login";
         }
+
+        public static class BuggyRouting
+        {
+            public const string Prefix = Rule + "Buggy";
+            public const string Auth = Prefix + "/Auth";
+            public const string NotFound = Prefix + "/NotFound";
+            public const string ServerError = Prefix + "/ServerError";
+            public const string BadRequest = Prefix + "/BadRequest";
+        }
     }
 }
