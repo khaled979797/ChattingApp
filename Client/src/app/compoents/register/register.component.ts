@@ -21,8 +21,7 @@ export class RegisterComponent {
 
   register(){
     this.accountService.register(this.model).subscribe({
-      next: () => this.cancel(),
-      error: (err) => this.toastr.error(err.error)
+      next: () => this.cancel()
     })
   }
   cancel(){
