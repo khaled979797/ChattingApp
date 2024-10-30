@@ -43,14 +43,16 @@ namespace ChattingApp.Api.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = tokenRepository.CreateToken(user)
+                Token = tokenRepository.CreateToken(user),
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
 
         [HttpPost(Router.AccountRouting.Login)]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
+            var user = await context.Users.Include(x => x.Photos)
+                .FirstOrDefaultAsync(x => x.UserName == loginDto.Username.ToLower());
             if (user == null) return Unauthorized("Invalid Username");
 
             using var hmac = new HMACSHA512(user.PasswordSalt);
@@ -62,7 +64,8 @@ namespace ChattingApp.Api.Controllers
             return new UserDto
             {
                 Username = user.UserName,
-                Token = tokenRepository.CreateToken(user)
+                Token = tokenRepository.CreateToken(user),
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
     }

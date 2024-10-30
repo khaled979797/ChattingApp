@@ -12,6 +12,9 @@
             public const string GetUsers = Prefix + "/Users";
             public const string GetUser = Prefix + "/{username}";
             public const string UpdateUser = Prefix + "/UpdateUser";
+            public const string AddPhoto = Prefix + "/AddPhoto";
+            public const string SetMainPhoto = Prefix + "/SetMainPhoto" + SingleRoute;
+            public const string DeletePhoto = Prefix + "/DeletePhoto" + SingleRoute;
         }
 
         public static class AccountRouting

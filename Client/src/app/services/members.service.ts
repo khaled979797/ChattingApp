@@ -36,4 +36,11 @@ export class MembersService {
       })
     );
   }
+  setMainPhoto(photoId:number){
+    return this.http.put(environment.apiUrl + `User/SetMainPhoto/${photoId}`, {});
+  }
+
+  deletePhoto(id: number) {
+    return this.http.delete(environment.apiUrl + `User/DeletePhoto/${id}`, {responseType: 'text'});
+  }
 }
