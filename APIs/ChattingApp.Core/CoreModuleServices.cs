@@ -1,6 +1,7 @@
 ﻿using ChattingApp.Core.Context;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Core.Repositories;
+using ChattingApp.Entities.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,6 +42,10 @@ namespace ChattingApp.Core
                     ValidateAudience = false
                 };
             });
+            #endregion
+
+            #region Cloudinary
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             #endregion
 
             return services;

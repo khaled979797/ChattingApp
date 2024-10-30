@@ -1,14 +1,16 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './compoents/home/home.component';
-import { MemberListComponent } from './members/member-list/member-list.component';
+import { HomeComponent } from './components/home/home.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { ListsComponent } from './compoents/lists/lists.component';
-import { MessagesComponent } from './compoents/messages/messages.component';
+import { ListsComponent } from './components/lists/lists.component';
+import { MessagesComponent } from './components/messages/messages.component';
 import { authGuard } from './guards/auth.guard';
 import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { LearnMoreComponent } from './compoents/learn-more/learn-more.component';
+import { LearnMoreComponent } from './components/learn-more/learn-more.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { preventUnsavedChangesGuard } from './guards/prevent-unsaved-changes.guard';
 
 export const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -17,7 +19,8 @@ export const routes: Routes = [
     children:
     [
       {path:'members', component: MemberListComponent},
-      {path:'members/:id', component: MemberDetailComponent},
+      {path:'members/:username', component: MemberDetailComponent},
+      {path:'member/edit', component: MemberEditComponent, canDeactivate: [preventUnsavedChangesGuard]},
       {path:'lists', component: ListsComponent},
       {path:'messages', component: MessagesComponent}
     ]

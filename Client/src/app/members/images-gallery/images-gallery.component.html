@@ -1,0 +1,34 @@
+<div class="gallery-lightbox-container">
+  <div class="gallery">
+    @for(img of images; track img.id; let i = $index){
+      <div class="gallery-img">
+        <img [src]="img.url" (click)="openPreviewImage(i)">
+      </div>
+    }
+  </div>
+  @if(showMask){
+    <div class="lightbox" @animation2>
+      @if(showCount){
+        <span class="count">{{currentIndex + 1}}/{{totalImageCount}}</span>
+      }
+      @if(previewImage){
+        <button class="close-btn" (click)="onClosePreview()"><i class="far fa-times-circle"></i></button>
+      }
+      @if(controls){
+        <button class="btn-lightbox-carousel btn-prev" (click)="prev()">
+          <i class="far fa-arrow-circle-left icon-lightbox-carousel icon-prev"></i>
+        </button>
+      }
+      @if(controls){
+        <button class="btn-lightbox-carousel btn-next" (click)="next()">
+          <i class="far fa-arrow-circle-right icon-lightbox-carousel icon-next"></i>
+        </button>
+      }
+      @if(previewImage){
+        <div class="lightbox-img" [@animation]="{value: 'visible'}" (@animation.done)="onAnimationEnd($event)">
+          <img [src]="currentLightboxImage.url">
+        </div>
+      }
+    </div>
+  }
+</div>
