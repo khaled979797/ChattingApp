@@ -21,7 +21,7 @@ namespace ChattingApp.Api
             builder.Services.AddSwaggerGen();
 
             #region Services
-            builder.Services.AddCoreModuleServices(builder.Configuration).AddEntitiesModuleServices();
+            builder.Services.AddCoreModuleServices(builder.Configuration).AddEntitiesModuleServices(builder.Configuration);
             #endregion
 
             var app = builder.Build();

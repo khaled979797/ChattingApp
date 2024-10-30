@@ -10,7 +10,8 @@
         {
             public const string Prefix = Rule + "User";
             public const string GetUsers = Prefix + "/Users";
-            public const string GetUser = Prefix;
+            public const string GetUser = Prefix + "/{username}";
+            public const string UpdateUser = Prefix + "/UpdateUser";
         }
 
         public static class AccountRouting
