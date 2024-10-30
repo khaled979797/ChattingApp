@@ -29,6 +29,7 @@ namespace ChattingApp.Core
             #region Dependencies
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPhotoRepository, PhotoRepository>();
             #endregion
 
             #region JWT

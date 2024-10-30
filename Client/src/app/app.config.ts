@@ -9,13 +9,14 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { errorInterceptor } from './interceptors/error.interceptor';
 import { jwtInterceptor } from './interceptors/jwt.interceptor';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
+import { provideSpinnerConfig } from 'ngx-spinner';
 
 export const appConfig: ApplicationConfig = {
   providers:
   [
     provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(),
     provideHttpClient(withInterceptors([errorInterceptor, jwtInterceptor, loadingInterceptor])),
-    provideAnimations(),
+    provideAnimations(), provideSpinnerConfig({type:'ball-scale-multiple'}),
     provideToastr({ timeOut:2000, positionClass:'toast-bottom-right', preventDuplicates:true})
   ]
 };

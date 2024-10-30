@@ -6,7 +6,7 @@ import { take } from 'rxjs/operators';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
   const accountService = inject(AccountService);
-  let currentUser:IUser = {username: '', token: '',};
+  let currentUser:IUser = {username: '', token: '', photoUrl: ''};
 
   accountService.currentUser$.pipe(take(1)).subscribe(user => currentUser = <IUser>user);
   if(currentUser){
