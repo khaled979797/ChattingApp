@@ -1,4 +1,5 @@
-﻿using ChattingApp.Core.Context;
+﻿using AutoMapper;
+using ChattingApp.Core.Context;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Entities.DTOs;
 using ChattingApp.Entities.Helpers;
@@ -15,15 +16,17 @@ namespace ChattingApp.Api.Controllers
     {
         private readonly AppDbContext context;
         private readonly ITokenRepository tokenRepository;
+        private readonly IMapper mapper;
 
-        public AccountController(AppDbContext context, ITokenRepository tokenRepository)
+        public AccountController(AppDbContext context, ITokenRepository tokenRepository, IMapper mapper)
         {
             this.context = context;
             this.tokenRepository = tokenRepository;
+            this.mapper = mapper;
         }
 
         [HttpPost(Router.AccountRouting.Register)]
-        public async Task<ActionResult<UserDto>> Register(LoginDto registerDto)
+        public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
             if (await context.Users.AnyAsync(x => x.UserName == registerDto.Username.ToLower()))
             {
@@ -32,19 +35,21 @@ namespace ChattingApp.Api.Controllers
 
             using var hmac = new HMACSHA512();
 
-            var user = new AppUser
-            {
-                UserName = registerDto.Username.ToLower(),
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password)),
-                PasswordSalt = hmac.Key
-            };
+            var user = mapper.Map<AppUser>(registerDto);
+
+            user.UserName = registerDto.Username.ToLower();
+            user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
+            user.PasswordSalt = hmac.Key;
+
             await context.Users.AddAsync(user);
             await context.SaveChangesAsync();
             return new UserDto
             {
                 Username = user.UserName,
                 Token = tokenRepository.CreateToken(user),
-                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
 
@@ -65,7 +70,9 @@ namespace ChattingApp.Api.Controllers
             {
                 Username = user.UserName,
                 Token = tokenRepository.CreateToken(user),
-                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs,
+                Gender = user.Gender
             };
         }
     }
