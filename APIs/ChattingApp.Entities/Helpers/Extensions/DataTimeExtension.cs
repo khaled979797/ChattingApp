@@ -1,4 +1,4 @@
-﻿namespace ChattingApp.Entities.Helpers
+﻿namespace ChattingApp.Entities.Helpers.Extensions
 {
     public static class DataTimeExtension
     {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Net;
 using System.Text.Json;
 
-namespace ChattingApp.Entities.Helpers
+namespace ChattingApp.Entities.Helpers.Exceptions
 {
     public class ExceptionMiddleware
     {

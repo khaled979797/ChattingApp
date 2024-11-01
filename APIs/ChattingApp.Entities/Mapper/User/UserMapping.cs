@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ChattingApp.Entities.DTOs;
-using ChattingApp.Entities.Helpers;
+using ChattingApp.Entities.Helpers.Extensions;
 using ChattingApp.Entities.Models;
 
 namespace ChattingApp.Entities.Mapper.User

@@ -3,6 +3,7 @@ using AutoMapper.QueryableExtensions;
 using ChattingApp.Core.Context;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Entities.DTOs;
+using ChattingApp.Entities.Helpers.Pagination;
 using ChattingApp.Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,9 +26,24 @@ namespace ChattingApp.Core.Repositories
                 .ProjectTo<MemberDto>(mapper.ConfigurationProvider).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<MemberDto>> GetMembersAsync()
+        public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
         {
-            return await context.Users.ProjectTo<MemberDto>(mapper.ConfigurationProvider).ToListAsync();
+            var query = context.Users.AsQueryable();
+            query = query.Where(u => u.UserName != userParams.CurrentUsername);
+            query = query.Where(u => u.Gender == userParams.Gender);
+
+            var minDateOfBirth = DateTime.Now.AddYears(-userParams.MaxAge - 1);
+            var maxDateOfBirth = DateTime.Now.AddYears(-userParams.MinAge);
+            query = query.Where(x => x.DateOfBirth >= minDateOfBirth && x.DateOfBirth <= maxDateOfBirth);
+
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(u => u.Created),
+                _ => query.OrderByDescending(u => u.LastActive)
+            };
+
+            return PagedList<MemberDto>.Create(query.AsNoTracking().ProjectTo<MemberDto>
+                (mapper.ConfigurationProvider), userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<AppUser> GetUserByIdAsync(int id)
