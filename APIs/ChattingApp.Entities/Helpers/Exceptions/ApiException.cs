@@ -1,4 +1,4 @@
-﻿namespace ChattingApp.Entities.Helpers
+﻿namespace ChattingApp.Entities.Helpers.Exceptions
 {
     public class ApiException
     {

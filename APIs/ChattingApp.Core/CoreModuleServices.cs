@@ -1,4 +1,5 @@
 ﻿using ChattingApp.Core.Context;
+using ChattingApp.Core.Filters;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Core.Repositories;
 using ChattingApp.Entities.Helpers;
@@ -30,6 +31,7 @@ namespace ChattingApp.Core
             services.AddScoped<ITokenRepository, TokenRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<LogUserActivity>();
             #endregion
 
             #region JWT

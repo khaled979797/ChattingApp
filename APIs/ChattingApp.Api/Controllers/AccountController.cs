@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ChattingApp.Core.Context;
+using ChattingApp.Core.Filters;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Entities.DTOs;
 using ChattingApp.Entities.Helpers;
@@ -11,6 +12,7 @@ using System.Text;
 
 namespace ChattingApp.Api.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     public class AccountController : ControllerBase
     {

@@ -2,7 +2,7 @@ using ChattingApp.Core;
 using ChattingApp.Core.Context;
 using ChattingApp.Core.Seed;
 using ChattingApp.Entities;
-using ChattingApp.Entities.Helpers;
+using ChattingApp.Entities.Helpers.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChattingApp.Api
