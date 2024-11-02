@@ -24,7 +24,6 @@ export class AppComponent implements OnInit{
   }
 
   setCurrentUser() {
-    let url:URL | null = null;
     if(typeof(localStorage) !== "undefined"){
       const userString = localStorage.getItem('user');
       if (!userString) return;
