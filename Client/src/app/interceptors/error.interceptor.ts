@@ -20,9 +20,13 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
                 }
               }
               throw modelStateErrors.flat();
-            }else{
+            }else if(typeof(error.error) == "object"){
+              toastr.error(error.error.title, error.status);
+            }
+            else{
               toastr.error(error.error);
             }
+
             break;
           case 401:
             toastr.error(error.error);

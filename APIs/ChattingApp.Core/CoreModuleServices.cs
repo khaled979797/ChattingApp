@@ -32,6 +32,8 @@ namespace ChattingApp.Core
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<LogUserActivity>();
+            services.AddScoped<ILikeRepository, LikeRepository>();
+
             #endregion
 
             #region JWT

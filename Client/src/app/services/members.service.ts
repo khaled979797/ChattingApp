@@ -97,4 +97,14 @@ export class MembersService {
     this.userParams = new UserParams(this.user);
     return this.userParams;
   }
+
+  addLike(username:string){
+    return this.http.post(environment.apiUrl + `Like/${username}`, {}, {responseType: 'text'})
+  }
+
+  getLikes(predicate:string, pageNumber:number, pageSize:number){
+    let params = this.getPaginationHeaders(pageNumber, pageSize);
+    params = params.append('predicate', predicate);
+    return this.getPaginatedResult<IMember[]>(environment.apiUrl + 'Like', params);
+  }
 }

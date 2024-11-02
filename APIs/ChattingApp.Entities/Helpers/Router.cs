@@ -32,5 +32,12 @@
             public const string ServerError = Prefix + "/ServerError";
             public const string BadRequest = Prefix + "/BadRequest";
         }
+
+        public static class LikeRouting
+        {
+            public const string Prefix = Rule + "Like";
+            public const string AddLike = Prefix + "/{username}";
+            public const string UserLikes = Prefix;
+        }
     }
 }

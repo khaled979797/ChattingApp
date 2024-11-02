@@ -26,7 +26,7 @@ namespace ChattingApp.Api.Controllers
         {
             var user = context.Users.Find(-1);
             if (user == null) return NotFound();
-            return Ok(user);
+            return user;
         }
 
         [HttpGet(Router.BuggyRouting.ServerError)]
@@ -38,7 +38,7 @@ namespace ChattingApp.Api.Controllers
         [HttpGet(Router.BuggyRouting.BadRequest)]
         public ActionResult<string> GetBadRequest()
         {
-            return BadRequest("BadRequest");
+            return BadRequest("Bad Request");
         }
     }
 }
