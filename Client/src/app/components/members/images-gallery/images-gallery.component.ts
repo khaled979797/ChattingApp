@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPhoto } from '../../models/iphoto';
 import { animate, style, transition, trigger, AnimationEvent } from '@angular/animations';
+import { IPhoto } from '../../../models/iphoto';
 
 @Component({
   selector: 'app-images-gallery',

@@ -4,7 +4,7 @@ using ChattingApp.Core.Interfaces;
 using ChattingApp.Entities.DTOs;
 using ChattingApp.Entities.Helpers;
 using ChattingApp.Entities.Helpers.Extensions;
-using ChattingApp.Entities.Helpers.Pagination;
+using ChattingApp.Entities.Helpers.Pagination.Params;
 using ChattingApp.Entities.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

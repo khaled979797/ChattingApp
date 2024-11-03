@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { IMember } from '../../models/imember';
-import { MembersService } from '../../services/members.service';
 import { MemberCardComponent } from "../member-card/member-card.component";
-import { take } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { IPagination } from '../../models/ipagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
-import { UserParams } from '../../models/user-params';
-import { AccountService } from '../../services/account.service';
-import { IUser } from '../../models/iuser';
+import { IMember } from '../../../models/imember';
+import { IPagination } from '../../../models/ipagination';
+import { UserParams } from '../../../models/user-params';
+import { IUser } from '../../../models/iuser';
+import { MembersService } from '../../../services/members.service';
 
 @Component({
   selector: 'app-member-list',
   standalone: true,
-  imports: [MemberCardComponent, CommonModule, PaginationModule, FormsModule, ButtonsModule],
+  imports: [CommonModule, PaginationModule, FormsModule, ButtonsModule, MemberCardComponent],
   templateUrl: './member-list.component.html',
   styleUrl: './member-list.component.css'
 })

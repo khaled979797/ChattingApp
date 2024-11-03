@@ -3,7 +3,7 @@ using ChattingApp.Entities.DTOs;
 using ChattingApp.Entities.Helpers.Extensions;
 using ChattingApp.Entities.Models;
 
-namespace ChattingApp.Entities.Mapper.User
+namespace ChattingApp.Entities.Mapper
 {
     public class UserMapping : Profile
     {
@@ -12,7 +12,6 @@ namespace ChattingApp.Entities.Mapper.User
             CreateMap<AppUser, MemberDto>()
                 .ForMember(dst => dst.PhotoUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).Url))
                 .ForMember(dst => dst.Age, opt => opt.MapFrom(src => src.DateOfBirth.CalculateAge()));
-            CreateMap<Photo, PhotoDto>();
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<RegisterDto, AppUser>();
         }

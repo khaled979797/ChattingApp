@@ -39,5 +39,14 @@
             public const string AddLike = Prefix + "/{username}";
             public const string UserLikes = Prefix;
         }
+
+        public static class MessageRouting
+        {
+            public const string Prefix = Rule + "Message";
+            public const string CreateMessage = Prefix + "/CreateMessage";
+            public const string GetMessages = Prefix + "/GetMessages";
+            public const string GetMessageThread = Prefix + "/GetMessageThread/{username}";
+            public const string DeleteMessage = Prefix + "/DeleteMessage" + SingleRoute;
+        }
     }
 }

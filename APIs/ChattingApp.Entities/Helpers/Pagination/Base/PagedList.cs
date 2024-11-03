@@ -1,4 +1,4 @@
-﻿namespace ChattingApp.Entities.Helpers.Pagination
+﻿namespace ChattingApp.Entities.Helpers.Pagination.Base
 {
     public class PagedList<T> : List<T>
     {

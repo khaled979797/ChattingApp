@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { IMember } from '../../models/imember';
 import { MembersService } from '../../services/members.service';
 import { FormsModule } from '@angular/forms';
-import { MemberCardComponent } from "../../members/member-card/member-card.component";
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { IPagination } from '../../models/ipagination';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { MemberCardComponent } from '../members/member-card/member-card.component';
 
 @Component({
   selector: 'app-lists',

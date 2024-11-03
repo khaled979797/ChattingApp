@@ -1,8 +1,4 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { IMember } from '../../models/imember';
-import { IUser } from '../../models/iuser';
-import { AccountService } from '../../services/account.service';
-import { MembersService } from '../../services/members.service';
 import { take } from 'rxjs/operators';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CommonModule } from '@angular/common';
@@ -11,6 +7,10 @@ import { ImagesGalleryComponent } from "../images-gallery/images-gallery.compone
 import { ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
 import { TimeagoModule } from 'ngx-timeago';
+import { IMember } from '../../../models/imember';
+import { IUser } from '../../../models/iuser';
+import { AccountService } from '../../../services/account.service';
+import { MembersService } from '../../../services/members.service';
 
 @Component({
   selector: 'app-member-edit',
