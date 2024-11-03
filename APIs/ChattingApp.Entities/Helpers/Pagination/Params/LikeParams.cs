@@ -1,4 +1,6 @@
-﻿namespace ChattingApp.Entities.Helpers.Pagination
+﻿using ChattingApp.Entities.Helpers.Pagination.Base;
+
+namespace ChattingApp.Entities.Helpers.Pagination.Params
 {
     public class LikeParams : PaginationParams
     {

@@ -1,4 +1,4 @@
-﻿using ChattingApp.Entities.Helpers.Pagination;
+﻿using ChattingApp.Entities.Helpers.Pagination.Base;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 

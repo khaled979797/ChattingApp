@@ -1,14 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMember } from '../../models/imember';
 import { CommonModule } from '@angular/common';
-import { IPhoto } from '../../models/iphoto';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
-import { AccountService } from '../../services/account.service';
-import { MembersService } from '../../services/members.service';
-import { IUser } from '../../models/iuser';
-import { take } from 'rxjs/operators';
-import { environment } from '../../../environments/environment.development';
-import { error } from 'console';
+import { take } from 'rxjs/operators';import { IMember } from '../../../models/imember';
+import { IUser } from '../../../models/iuser';
+import { AccountService } from '../../../services/account.service';
+import { MembersService } from '../../../services/members.service';
+import { environment } from '../../../../environments/environment.development';
+import { IPhoto } from '../../../models/iphoto';
+;
 
 @Component({
   selector: 'app-photo-editor',

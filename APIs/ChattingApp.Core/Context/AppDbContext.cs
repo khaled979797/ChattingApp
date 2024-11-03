@@ -9,6 +9,7 @@ namespace ChattingApp.Core.Context
         public DbSet<AppUser> Users { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<UserLike> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

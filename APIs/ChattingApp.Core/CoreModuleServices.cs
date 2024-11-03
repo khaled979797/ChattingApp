@@ -33,6 +33,7 @@ namespace ChattingApp.Core
             services.AddScoped<IPhotoRepository, PhotoRepository>();
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikeRepository, LikeRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             #endregion
 

@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { IMember } from '../../models/imember';
 import { RouterLink } from '@angular/router';
-import { MembersService } from '../../services/members.service';
 import { ToastrService } from 'ngx-toastr';
+import { MembersService } from '../../../services/members.service';
+import { IMember } from '../../../models/imember';
 
 @Component({
   selector: 'app-member-card',
