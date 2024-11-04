@@ -3,7 +3,9 @@ using ChattingApp.Core.Filters;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Core.Repositories;
 using ChattingApp.Entities.Helpers;
+using ChattingApp.Entities.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,6 +54,18 @@ namespace ChattingApp.Core
 
             #region Cloudinary
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            #endregion
+
+            #region Identity
+            services.AddIdentityCore<AppUser>().AddSignInManager<SignInManager<AppUser>>()
+                .AddRoles<AppRole>().AddRoleManager<RoleManager<AppRole>>()
+                .AddRoleValidator<RoleValidator<AppRole>>().AddEntityFrameworkStores<AppDbContext>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("ModeratePhotoRole", policy => policy.RequireRole("Admin", "Moderator"));
+            });
             #endregion
 
             return services;

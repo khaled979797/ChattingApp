@@ -3,5 +3,6 @@ export interface IUser {
   token: string,
   photoUrl?: string,
   knownAs?: string,
-  gender?: string
+  gender?: string,
+  roles?: string[]
 }
