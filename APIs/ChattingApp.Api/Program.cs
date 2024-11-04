@@ -3,6 +3,8 @@ using ChattingApp.Core.Context;
 using ChattingApp.Core.Seed;
 using ChattingApp.Entities;
 using ChattingApp.Entities.Helpers.Exceptions;
+using ChattingApp.Entities.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ChattingApp.Api
@@ -39,8 +41,10 @@ namespace ChattingApp.Api
                 try
                 {
                     var context = services.GetRequiredService<AppDbContext>();
+                    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
                     await context.Database.MigrateAsync();
-                    await SeedUsers.SeedUsersData(context);
+                    await SeedUsers.SeedUsersData(userManager, roleManager);
                 }
                 catch (Exception ex)
                 {

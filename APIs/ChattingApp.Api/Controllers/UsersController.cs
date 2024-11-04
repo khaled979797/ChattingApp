@@ -26,6 +26,7 @@ namespace ChattingApp.Api.Controllers
             this.mapper = mapper;
             this.photoRepository = photoRepository;
         }
+
         [HttpGet(Router.UserRouting.GetUsers)]
         public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {

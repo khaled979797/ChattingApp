@@ -48,5 +48,13 @@
             public const string GetMessageThread = Prefix + "/GetMessageThread/{username}";
             public const string DeleteMessage = Prefix + "/DeleteMessage" + SingleRoute;
         }
+
+        public static class AdminRouting
+        {
+            public const string Prefix = Rule + "Admin";
+            public const string UsersWithRoles = Prefix + "/UsersWithRoles";
+            public const string PhotosToModerate = Prefix + "/PhotosToModerate";
+            public const string EditRoles = Prefix + "/EditRoles/{username}";
+        }
     }
 }

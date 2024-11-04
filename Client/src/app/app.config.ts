@@ -11,6 +11,7 @@ import { jwtInterceptor } from './interceptors/jwt.interceptor';
 import { loadingInterceptor } from './interceptors/loading.interceptor';
 import { provideSpinnerConfig } from 'ngx-spinner';
 import { TimeagoModule } from 'ngx-timeago';
+import { BsModalService, ModalModule } from 'ngx-bootstrap/modal';
 
 export const appConfig: ApplicationConfig = {
   providers:
@@ -19,6 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withFetch(), withInterceptors([errorInterceptor, jwtInterceptor, loadingInterceptor])),
     provideAnimations(), provideSpinnerConfig({type:'ball-scale-multiple'}),
     provideToastr({ timeOut:2000, positionClass:'toast-bottom-right', preventDuplicates:true}),
-    importProvidersFrom(TimeagoModule.forRoot())
+    importProvidersFrom(TimeagoModule.forRoot(), ModalModule.forRoot(), BsModalService)
   ]
 };

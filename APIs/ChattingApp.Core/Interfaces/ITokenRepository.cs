@@ -4,6 +4,6 @@ namespace ChattingApp.Core.Interfaces
 {
     public interface ITokenRepository
     {
-        string CreateToken(AppUser user);
+        Task<string> CreateToken(AppUser user);
     }
 }
