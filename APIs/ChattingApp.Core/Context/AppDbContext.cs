@@ -20,6 +20,7 @@ namespace ChattingApp.Core.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.ApplyUtcDateTimeConverter();
         }
     }
 }

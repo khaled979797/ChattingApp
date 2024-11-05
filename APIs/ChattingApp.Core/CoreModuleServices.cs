@@ -32,11 +32,9 @@ namespace ChattingApp.Core
 
             #region Dependencies
             services.AddScoped<ITokenRepository, TokenRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPhotoRepository, PhotoRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<LogUserActivity>();
-            services.AddScoped<ILikeRepository, LikeRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
             services.AddSingleton<PresenceTracker>();
 
             #endregion
