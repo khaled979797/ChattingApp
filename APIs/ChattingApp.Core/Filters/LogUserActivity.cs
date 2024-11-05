@@ -13,11 +13,11 @@ namespace ChattingApp.Core.Filters
             if (!resultContext.HttpContext.User.Identity.IsAuthenticated) return;
 
             var userId = resultContext.HttpContext.User.GetUserId();
-            var userRepository = resultContext.HttpContext.RequestServices.GetService<IUserRepository>();
+            var unitOfWork = resultContext.HttpContext.RequestServices.GetService<IUnitOfWork>();
 
-            var user = await userRepository.GetUserByIdAsync(userId);
-            user.LastActive = DateTime.Now;
-            await userRepository.SaveAllAsync();
+            var user = await unitOfWork.UserRepository.GetUserByIdAsync(userId);
+            user.LastActive = DateTime.UtcNow;
+            await unitOfWork.Complete();
         }
     }
 }

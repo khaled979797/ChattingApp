@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TimeagoModule } from 'ngx-timeago';
@@ -10,7 +10,8 @@ import { MessageService } from '../../../services/message.service';
   standalone: true,
   imports: [CommonModule, FormsModule, TimeagoModule],
   templateUrl: './member-messages.component.html',
-  styleUrl: './member-messages.component.css'
+  styleUrl: './member-messages.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MemberMessagesComponent {
   @ViewChild('messageForm') messageForm!: NgForm;

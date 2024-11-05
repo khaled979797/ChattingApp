@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TabDirective, TabsetComponent, TabsModule } from 'ngx-bootstrap/tabs';
 import { ImagesGalleryComponent } from "../images-gallery/images-gallery.component";
@@ -7,7 +7,6 @@ import { TimeagoModule } from "ngx-timeago";
 import { MemberMessagesComponent } from "../member-messages/member-messages.component";
 import { ToastrService } from 'ngx-toastr';
 import { IMember } from '../../../models/imember';
-import { IMessage } from '../../../models/imessage';
 import { MembersService } from '../../../services/members.service';
 import { MessageService } from '../../../services/message.service';
 import { PresenceService } from '../../../services/presence.service';

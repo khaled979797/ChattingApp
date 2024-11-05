@@ -8,6 +8,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { RouterLink } from '@angular/router';
 import { TimeagoModule } from 'ngx-timeago';
 import { CommonModule } from '@angular/common';
+import { ConfirmService } from '../../services/confirm.service';
 
 @Component({
   selector: 'app-messages',
@@ -24,7 +25,7 @@ export class MessagesComponent implements OnInit{
   pageSize = 5;
   loading: boolean = false;
 
-  constructor(private messageService:MessageService){}
+  constructor(private messageService:MessageService, private confirmService:ConfirmService){}
 
   ngOnInit(): void {
     this.loadMessages();
@@ -47,8 +48,12 @@ export class MessagesComponent implements OnInit{
   }
 
   deleteMessage(id:number){
-    this.messageService.deleteMessage(id).subscribe(() =>{
-      this.messages.splice(this.messages.findIndex(x => x.id === id), 1);
+    this.confirmService.confirm('Confirm delete message', 'This cannot be undone').subscribe(result =>{
+      if(result){
+        this.messageService.deleteMessage(id).subscribe(() =>{
+          this.messages.splice(this.messages.findIndex(x => x.id === id), 1);
+        });
+      }
     });
   }
 }
