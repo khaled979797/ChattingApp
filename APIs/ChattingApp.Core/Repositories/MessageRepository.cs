@@ -21,6 +21,11 @@ namespace ChattingApp.Core.Repositories
             this.mapper = mapper;
         }
 
+        public void AddGroup(Group group)
+        {
+            context.Groups.Add(group);
+        }
+
         public void AddMessage(Message message)
         {
             context.Messages.Add(message);
@@ -31,9 +36,25 @@ namespace ChattingApp.Core.Repositories
             context.Messages.Remove(message);
         }
 
+        public async Task<Connection> GetConnection(string connectionId)
+        {
+            return await context.Connections.FirstOrDefaultAsync(x => x.ConnectionId == connectionId);
+        }
+
+        public async Task<Group> GetGroupForConnection(string connectionId)
+        {
+            return await context.Groups.Include(x => x.Connections)
+                .Where(x => x.Connections.Any(x => x.ConnectionId == connectionId)).FirstOrDefaultAsync();
+        }
+
         public async Task<Message> GetMessage(int id)
         {
             return await context.Messages.Include(x => x.Sender).Include(x => x.Recipient).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<Group> GetMessageGroup(string groupName)
+        {
+            return await context.Groups.Include(x => x.Connections).FirstOrDefaultAsync(x => x.Name == groupName);
         }
 
         public async Task<PagedList<MessageDto>> GetMessagesForUser(MessageParams messageParams)
@@ -69,12 +90,17 @@ namespace ChattingApp.Core.Repositories
             {
                 foreach (var msg in unreadMessages)
                 {
-                    msg.DateRead = DateTime.Now;
+                    msg.DateRead = DateTime.UtcNow;
                 }
                 await context.SaveChangesAsync();
             }
 
             return mapper.Map<IEnumerable<MessageDto>>(messages);
+        }
+
+        public void RemoveConnection(Connection connection)
+        {
+            context.Connections.Remove(connection);
         }
 
         public async Task<bool> SaveAllAsync()

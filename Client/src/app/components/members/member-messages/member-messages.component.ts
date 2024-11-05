@@ -12,22 +12,19 @@ import { MessageService } from '../../../services/message.service';
   templateUrl: './member-messages.component.html',
   styleUrl: './member-messages.component.css'
 })
-export class MemberMessagesComponent implements OnInit{
+export class MemberMessagesComponent {
   @ViewChild('messageForm') messageForm!: NgForm;
-  @Input() messages!:IMessage[];
   loading:boolean = false;
   messageContent = '';
   @Input() username!: string;
 
   constructor(public messageService:MessageService){}
 
-  ngOnInit(): void {
-  }
-
-  sendMessage(){
-    this.messageService.sendMessage(this.username, this.messageContent).subscribe(message =>{
-      this.messages.push(message);
-      this.messageForm.reset();
-    });
+  sendMessage() {
+    if (!this.username) return;
+    this.loading = true;
+    this.messageService.sendMessage(this.username, this.messageContent).then(() => {
+      this.messageForm?.reset();
+    }).finally(() => this.loading = false);
   }
 }

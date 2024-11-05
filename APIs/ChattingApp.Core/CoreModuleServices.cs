@@ -2,6 +2,7 @@
 using ChattingApp.Core.Filters;
 using ChattingApp.Core.Interfaces;
 using ChattingApp.Core.Repositories;
+using ChattingApp.Core.SignalR;
 using ChattingApp.Entities.Helpers;
 using ChattingApp.Entities.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,10 +37,11 @@ namespace ChattingApp.Core
             services.AddScoped<LogUserActivity>();
             services.AddScoped<ILikeRepository, LikeRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddSingleton<PresenceTracker>();
 
             #endregion
 
-            #region JWT
+            #region JWT/SignalR
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -49,7 +51,22 @@ namespace ChattingApp.Core
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };
+
+                options.Events = new JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        var path = context.HttpContext.Request.Path;
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/Hubs"))
+                        {
+                            context.Token = accessToken;
+                        }
+                        return Task.CompletedTask;
+                    }
+                };
             });
+            services.AddSignalR();
             #endregion
 
             #region Cloudinary
