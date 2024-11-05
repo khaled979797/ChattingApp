@@ -1,4 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  padding: 0;
+  overflow:auto;
+  height: 100vh;
+  background: linear-gradient(45deg, #a0d8ef, #b8e2f2, #d0f4f7, #e0f7fa);
+  background-size: 600% 600%;
+  animation: lightBlueGradientBackground 10s ease infinite;
+}
+
+@keyframes lightBlueGradientBackground {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 .tab-panel {
   border: 1px solid #ddd;
   padding: 10px;
