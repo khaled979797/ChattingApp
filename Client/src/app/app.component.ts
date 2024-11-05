@@ -8,6 +8,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { HomeComponent } from "./components/home/home.component";
 import bootstrap from '../main.server';
 import { NgxSpinnerComponent } from 'ngx-spinner';
+import { PresenceService } from './services/presence.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ import { NgxSpinnerComponent } from 'ngx-spinner';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit{
-  constructor(private accountService:AccountService){}
+  constructor(private accountService:AccountService, private presence: PresenceService){}
 
   ngOnInit(): void {
     this.setCurrentUser();
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit{
       if (!userString) return;
       const user: IUser = JSON.parse(userString);
       this.accountService.setCurrentUser(user);
+      this.presence.createHubConnection(user);
     }
   }
 }

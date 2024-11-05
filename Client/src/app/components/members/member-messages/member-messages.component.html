@@ -1,17 +1,14 @@
 <div class="card">
   <div class="card-body" #scrollMe style="overflow: scroll; height: 535px"
     [scrollTop]="scrollMe.scrollHeight">
-      <!-- @if((messageService.messageThread$ | async)?.length === 0){ -->
-        @if(messages.length === 0){
+      @if((messageService.messageThread$ | async)?.length === 0){
         <div >
           No messages yet... say hi by using the message box below
         </div>
       }
-      <!-- @if((messageService.messageThread$ | async)!.length > 0){ -->
-        @if(messages.length > 0){
+      @if((messageService.messageThread$ | async)!.length > 0){
         <ul class="chat">
-          <!-- @for((message of messageService.messageThread$ | async); track message){ -->
-            @for(message of messages; track message){
+          @for((message of messageService.messageThread$ | async); track message){
             <li>
               <div>
                 <span class="chat-img float-end">

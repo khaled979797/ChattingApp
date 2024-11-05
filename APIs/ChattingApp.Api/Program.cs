@@ -1,6 +1,7 @@
 using ChattingApp.Core;
 using ChattingApp.Core.Context;
 using ChattingApp.Core.Seed;
+using ChattingApp.Core.SignalR;
 using ChattingApp.Entities;
 using ChattingApp.Entities.Helpers.Exceptions;
 using ChattingApp.Entities.Models;
@@ -60,13 +61,16 @@ namespace ChattingApp.Api
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:4200"));
 
             app.UseAuthentication();
 
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapHub<PresenceHub>("Hubs/Presence");
+            app.MapHub<MessageHub>("Hubs/Message");
 
             app.Run();
         }

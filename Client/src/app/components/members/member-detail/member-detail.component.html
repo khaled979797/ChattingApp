@@ -3,6 +3,12 @@
     <div class="card">
       <img [src]="member.photoUrl || 'assets/user.png'" [alt]="member.knownAs" class="card-img-top img-thumbnail">
       <div class="card-body">
+        @if((presence.onlineUsers$ | async)?.includes(member.userName)){
+          <div class="mb-2">
+            <i class="fa fa-user-circle text-success"></i>
+            <span class="text-success" style="margin-left: 5px;">Online now</span>
+          </div>
+        }
         <div>
           <strong>Location:</strong>
           <p>{{member.city}}, {{member.country}}</p>
@@ -44,7 +50,7 @@
         <app-images-gallery [images]="member.photos" [showCount]="true"></app-images-gallery>
       </tab>
       <tab heading="Messages" (selectTab)="onTabActivated($event)">
-        <app-member-messages [messages]="messages" [username]="member.userName"></app-member-messages>
+        <app-member-messages [username]="member.userName"></app-member-messages>
       </tab>
     </tabset>
   </div>
