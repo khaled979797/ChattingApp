@@ -29,7 +29,7 @@ namespace ChattingApp.Core.Seed
 
             foreach (var user in users)
             {
-                user.UserName = user.UserName.ToLower();
+                user.UserName = user.UserName!.ToLower();
                 await userManager.CreateAsync(user, "Khaled@1234");
                 await userManager.AddToRoleAsync(user, "Member");
             }

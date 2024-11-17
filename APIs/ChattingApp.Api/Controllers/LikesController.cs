@@ -40,7 +40,7 @@ namespace ChattingApp.Api.Controllers
                 SourceUserId = sourceUserId,
                 TargetUserId = targetUser.Id
             };
-            sourceUser.LikedUsers.Add(userLike);
+            sourceUser.LikedUsers!.Add(userLike);
 
             if (await unitOfWork.Complete()) return Ok();
             return BadRequest("Failed to like user");

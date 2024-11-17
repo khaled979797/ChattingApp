@@ -68,7 +68,9 @@ namespace ChattingApp.Core
             #endregion
 
             #region Cloudinary
-            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
+            var cloudinarySettings = new CloudinarySettings();
+            config.GetSection("cloudinarySettings").Bind(cloudinarySettings);
+            services.AddSingleton(cloudinarySettings);
             #endregion
 
             #region Identity
