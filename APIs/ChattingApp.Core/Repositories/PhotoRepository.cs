@@ -3,20 +3,19 @@ using ChattingApp.Entities.Helpers;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 
 namespace ChattingApp.Core.Repositories
 {
     public class PhotoRepository : IPhotoRepository
     {
         private readonly Cloudinary cloudinary;
-        public PhotoRepository(IOptions<CloudinarySettings> config)
+        public PhotoRepository(CloudinarySettings cloudinarySettings)
         {
             var account = new Account
             {
-                Cloud = config.Value.CloudName,
-                ApiKey = config.Value.ApiKey,
-                ApiSecret = config.Value.ApiSecret
+                Cloud = cloudinarySettings.CloudName,
+                ApiKey = cloudinarySettings.ApiKey,
+                ApiSecret = cloudinarySettings.ApiSecret
             };
             cloudinary = new Cloudinary(account);
         }

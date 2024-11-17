@@ -67,10 +67,16 @@ namespace ChattingApp.Api
 
             app.UseAuthorization();
 
+            app.UseDefaultFiles();
+
+            app.UseStaticFiles();
+
             app.MapControllers();
 
             app.MapHub<PresenceHub>("Hubs/Presence");
             app.MapHub<MessageHub>("Hubs/Message");
+
+            app.MapFallbackToController("Index", "Fallback");
 
             app.Run();
         }
