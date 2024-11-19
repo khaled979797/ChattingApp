@@ -19,8 +19,4 @@
     <ProjectReference Include="..\ChattingApp.Core\ChattingApp.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 </Project>
