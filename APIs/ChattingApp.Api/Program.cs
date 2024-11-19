@@ -76,6 +76,8 @@ namespace ChattingApp.Api
             app.MapHub<PresenceHub>("Hubs/Presence");
             app.MapHub<MessageHub>("Hubs/Message");
 
+            app.MapFallbackToController("Index", "Fallback");
+
             app.Run();
         }
     }
